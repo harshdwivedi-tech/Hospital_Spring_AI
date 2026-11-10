@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System</title>
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+
+<header class="header">
+    <h1>Hospital Management System</h1>
+    <span>Spring Boot Application</span>
+</header>
+
+<div class="layout">
+
+    <aside class="sidebar">
+        <button class="nav-button active" data-page="dashboard">Dashboard</button>
+        <button class="nav-button" data-page="hospitals">Hospitals</button>
+        <button class="nav-button" data-page="assistant">AI Assistant</button>
+        <a class="nav-button" href="/swagger-ui/index.html"
+           target="_blank" rel="noreferrer">API Documentation</a>
+    </aside>
+
+    <main class="main">
+
+        <!-- Dashboard -->
+        <section class="page active" id="page-dashboard">
+            <h2>Dashboard</h2>
+            <p>Welcome to the Hospital Management System.</p>
+
+            <div class="cards">
+                <article class="card">
+                    <h3>Total Hospitals</h3>
+                    <p class="number" id="totalHospitals">0</p>
+                    <button class="primary" data-go="hospitals">
+                        Manage Hospitals
+                    </button>
+                </article>
+
+                <article class="card">
+                    <h3>AI Assistant</h3>
+                    <p>Ask questions about hospitals, locations and specializations.</p>
+                    <button class="primary" data-go="assistant">
+                        Open Assistant
+                    </button>
+                </article>
+            </div>
+
+            <div class="panel">
+                <h3>Recently Added Hospitals</h3>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Location</th>
+                            <th>Specialization</th>
+                            <th>ID</th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="recentRows">
+                        <tr>
+                            <td colspan="4">Loading...</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hospital Management -->
+        <section class="page" id="page-hospitals">
+
+            <div class="heading-row">
+                <div>
+                    <h2>Hospital Management</h2>
+                    <p>Add, view, update and delete hospital records.</p>
+                </div>
+
+                <button class="primary" id="addButton">
+                    Add Hospital
+                </button>
+            </div>
+
+            <div class="panel">
+                <h3 id="formTitle">Add Hospital</h3>
+
+                <form id="hospitalForm">
+
+                    <input type="hidden" id="hospitalId">
+
+                    <label for="name">Hospital Name</label>
+                    <input id="name" type="text" maxlength="120" required>
+
+                    <label for="location">Location</label>
+                    <input id="location" type="text" maxlength="120" required>
+
+                    <label for="specialization">Specialization</label>
+                    <input id="specialization" type="text"
+                           maxlength="120" required>
+
+                    <div class="actions">
+                        <button class="primary" id="saveButton" type="submit">
+                            Save Hospital
+                        </button>
+
+                        <button class="secondary" id="cancelButton"
+                                type="button" hidden>
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+
+                <p class="message" id="formMessage"></p>
+            </div>
+
+            <div class="panel">
+
+                <div class="heading-row">
+                    <h3>All Hospitals</h3>
+
+                    <button class="secondary" id="refreshButton">
+                        Refresh
+                    </button>
+                </div>
+
+                <label for="searchInput">Search Hospitals</label>
+                <input id="searchInput" type="search"
+                       placeholder="Search by name, location or specialization">
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Hospital Name</th>
+                            <th>Location</th>
+                            <th>Specialization</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="hospitalRows">
+                        <tr>
+                            <td colspan="5">Loading...</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="muted" id="recordCount"></p>
+            </div>
+        </section>
+
+        <!-- AI Assistant -->
+        <section class="page" id="page-assistant">
+
+            <h2>AI Assistant</h2>
+            <p>Ask questions about the hospitals saved in your database.</p>
+
+            <div class="panel">
+
+                <div id="chatMessages" class="chat-messages">
+                    <div class="assistant-message">
+                        Hello! I can help you find hospitals by location
+                        or specialization.
+                    </div>
+                </div>
+
+                <form id="chatForm" class="chat-form">
+
+                    <input id="chatInput" type="text"
+                           placeholder="Type your question..."
+                           autocomplete="off" required>
+
+                    <button class="primary" id="sendButton" type="submit">
+                        Send
+                    </button>
+
+                </form>
+
+                <p class="muted">
+                    AI responses are generated by your existing Spring AI backend.
+                </p>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<script src="/js/app.js"></script>
+
+</body>
+</html>
